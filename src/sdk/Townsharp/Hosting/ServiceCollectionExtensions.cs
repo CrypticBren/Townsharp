@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using Townsharp.Configuration;
-using Townsharp.Infrastructure.Hosting;
 using Townsharp.Internals.Consoles;
 using Townsharp.Internals.Groups;
 using Townsharp.Internals.Servers;
@@ -38,7 +37,7 @@ public static class ServiceCollectionExtensions
             config.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly);
         });
 
-        services.AddTownsharpInfra();
+        services.AddTownsharp();
 
         services.AddSingleton<ServerManager>();
         services.AddSingleton<GroupManager>();

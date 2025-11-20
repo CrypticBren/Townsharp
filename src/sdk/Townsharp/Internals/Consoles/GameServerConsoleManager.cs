@@ -45,9 +45,9 @@ internal class GameServerConsoleManager : IReadOnlyDictionary<ServerId, GameServ
 
     internal Task ManageGameServerConsoleAsync(ServerId serverId)
     {
-        var console = new GameServerConsole(serverId, this.consoleClientFactory, this.consoleAccessProvider, this.loggerFactory.CreateLogger<GameServerConsole>());
+        var console = new GameServerConsole(serverId, this.consoleAccessProvider, this.loggerFactory.CreateLogger<GameServerConsole>());
         this.gameServerConsoles.Add(serverId, console);
-        //console.TryToConnect();
+        console.TryToConnect();
 
         return Task.CompletedTask;
     }

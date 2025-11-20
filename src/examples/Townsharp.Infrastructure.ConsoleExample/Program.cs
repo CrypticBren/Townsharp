@@ -69,7 +69,7 @@ foreach (var console in consoles)
       var result = await console.RunCommandAsync("player list");
 
       result.HandleResult(
-          result => Console.WriteLine($"RESULT:{Environment.NewLine}{result}"),
+          result2 => Console.WriteLine($"RESULT:{Environment.NewLine}{result2}"),
           error => Console.Error.WriteLine($"ERROR:{Environment.NewLine}{error}"));
    });
 }

@@ -61,7 +61,7 @@ internal class UserTokenProvider
             {
                 var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 return await retryPolicy.ExecuteAsync(
-                    async (CancellationToken cancellationToken) =>
+                    async (CancellationToken cancellationToken2) =>
                     {
                         using var httpClient = httpClientFactory.CreateClient();
                         httpClient.DefaultRequestHeaders.Add("x-api-key", "2l6aQGoNes8EHb94qMhqQ5m2iaiOM9666oDTPORf");

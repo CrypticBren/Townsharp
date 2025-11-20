@@ -1,17 +1,18 @@
 ﻿using System.Threading.Channels;
 
 using Microsoft.Extensions.Logging;
-
+using Townsharp.Infrastructure;
 using Townsharp.Infrastructure.Consoles;
+using Townsharp.Infrastructure.WebApi;
 using Townsharp.Internals.Consoles;
 using Townsharp.Servers;
+using ConsoleAccess = Townsharp.Internals.Consoles.ConsoleAccess;
 
 namespace Townsharp.Consoles;
 
 public class GameServerConsole
 {
     private readonly ServerId id;
-    private readonly ConsoleClientFactory consoleClientFactory;
     private readonly ConsoleAccessProvider consoleAccessProvider;
     private readonly ILogger<GameServerConsole> logger;
     private Task<IConsoleClient?> consoleClientFactoryTask = Task.FromResult<IConsoleClient?>(null);
@@ -20,12 +21,10 @@ public class GameServerConsole
 
     internal GameServerConsole(
         ServerId id,
-        ConsoleClientFactory consoleClientFactory,
         ConsoleAccessProvider consoleAccessProvider,
         ILogger<GameServerConsole> logger)
     {
         this.id = id;
-        this.consoleClientFactory = consoleClientFactory;
         this.consoleAccessProvider = consoleAccessProvider;
         this.logger = logger;
     }
@@ -142,8 +141,14 @@ public class GameServerConsole
             try
             {
                 var eventChannel = Channel.CreateUnbounded<Townsharp.Infrastructure.Consoles.ConsoleEvent>();
-                var client = consoleClientFactory.CreateClient(access.Uri, access.AccessToken, eventChannel.Writer);
-
+                //idk if this will work/this is untested and will likely fail unless it does work
+                IConsoleClient? client = await consoleClientFactoryTask;
+                if (client == null)
+                {
+                    logger.LogError("ConsoleClient is null in GameServerConsole for server {ServerId}", id);
+                    return default;
+                }
+                
                 await client.ConnectAsync(default).ConfigureAwait(false);
 
                 return client;

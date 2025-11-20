@@ -14,7 +14,7 @@ public class ServerEventTests
 
         List<PopulationChangedEvent> populationChangedEvents = new();
 
-        s.PopulationChanged += (s, e) =>
+        s.PopulationChanged += (s2, e) =>
         {
             populationChangedEvents.Add(e);
         };
@@ -58,7 +58,7 @@ public class ServerEventTests
         // test that when Server comes online, a ServerOnlineEvent is raised.
         Server s = new(1, 2);
 
-        s.ServerOnline += (s, e) =>
+        s.ServerOnline += (s2, e) =>
         {
             Assert.True(true);
         };
@@ -72,7 +72,7 @@ public class ServerEventTests
         // test that when Server goes offline, a ServerOfflineEvent is raised.
         Server s = new(1, 2);
 
-        s.ServerOffline += (s, e) =>
+        s.ServerOffline += (s2, e) =>
         {
             Assert.True(true);
         };

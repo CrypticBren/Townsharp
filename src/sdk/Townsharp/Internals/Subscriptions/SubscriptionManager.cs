@@ -4,7 +4,7 @@ using Townsharp.Infrastructure.Subscriptions;
 
 namespace Townsharp.Internals.Subscriptions;
 
-internal class SubscriptionManager
+/*internal class SubscriptionManager
 {
     private readonly IMediator mediator;
     private readonly SubscriptionMultiplexerFactory subscriptionMultiplexerFactory;
@@ -30,3 +30,4 @@ internal class SubscriptionManager
     //    multiplexer.RegisterSubscriptions(new[] { new SubscriptionDefinition("me-group-invite-create", (int)userId) });
     //}
 }
+*/
